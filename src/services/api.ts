@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from "react";
 
 const api = axios.create({
-    baseURL: 'viacep.com.br',
+    baseURL: 'https://viacep.com.br',
 });
 interface Data{
   cep: string;
