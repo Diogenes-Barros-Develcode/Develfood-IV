@@ -5,6 +5,7 @@ import { useDelete } from "../services/delete";
 import { usePost } from "../services/post";
 import { usePut } from "../services/put";
 
+
 interface Data{
   cep: string;
   logradouro: string;
@@ -15,21 +16,28 @@ interface Data{
   nome: string;
 }
 
-interface Users{
-  email: string;
-  gender: string;
-  name: string;
-  status: string;
-}
-
 export function Home(){
 
   const { data, loading } = useFetch<Data>('/ws/01001000/json/')
 
-  const { data: CreateUsers, loading: isLoading, handlerPost} = usePost<Users>('/public/v2/users', {
-    email: "diogenes@develcode8.com",
+  const { data: CreateUsers, loading: isLoading, handlerPost} = usePost('/public/v2/users', {
+    email: "diogenes@develcode9.com",
     gender: "male",
     name: "diogenes",
+    status: "active",
+  },
+  {
+    headers: {
+      "Content-type": "application/json",
+      Authorization: "Bearer a4e3743577c2a9f43ef23ca81f710292e0158b333e74723043f685454876fda1"
+    }
+  }
+  )
+
+  const { data: ModifyUsers, loading: isloading, handlerPut } = usePut('/public/v2/users/11750', {
+    email: "diogenes@develcode10.com",
+    gender: "female",
+    name: "kevin",
     status: "active",
   },
   {
@@ -64,14 +72,8 @@ export function Home(){
               )}
               />
 
-              <Button title="Put" onPress={() => usePut('/public/v2/users/11725', {
-                headers: {
-                  "Content-type": "application/json",
-                  Authorization: "Bearer a4e3743577c2a9f43ef23ca81f710292e0158b333e74723043f685454876fda1"
-                }
-              }
-              )}
-              />
+              <Button title="Put" onPress={() => handlerPut()}/>
+
           </View>
         }
         </View>
