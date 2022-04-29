@@ -4,17 +4,9 @@ import { useEffect, useState } from "react";
 const api = axios.create({
     baseURL: 'https://viacep.com.br',
 });
-interface Data{
-  cep: string;
-  logradouro: string;
-  complemento: string;
-  bairro: string;
-  localidade: string;
-  uf: string;
-}
 
 export function useFetch<T = unknown>(url: string, options?: AxiosRequestConfig){
-    const [data, setData] = useState<Data>({} as Data);
+    const [data, setData] = useState<T>({} as T);
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<Error | null>(null)
 

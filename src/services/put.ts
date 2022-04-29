@@ -1,12 +1,12 @@
-import axios, { AxiosRequestConfig } from 'axios'
+import axios, { AxiosRequestConfig } from "axios";
 
 const api = axios.create({
     baseURL: 'https://gorest.co.in'
 })
 
-export const useDelete= async(url: string, options?: AxiosRequestConfig) => {
+export const usePut= async<T = unknown>(url: string, body: T) => {
     try {
-        const response = await api.delete(url, options)
+        const response = await api.put(url, body)
         console.log(response.data)
         return response
     } catch (error) {
