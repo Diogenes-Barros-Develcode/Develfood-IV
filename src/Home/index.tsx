@@ -1,46 +1,38 @@
 import React from "react";
-import { Text, View, Button } from "react-native";
-import { dataDTO } from '../dtos/dataDTO';
+import { Text, View, Button, BackHandler } from "react-native";
 import { useFetch } from "../services/api";
 import { usePost } from "../services/post";
 
-interface CreatPostParams{
-  name: string;
-  email: string;
-  gender: string;
-  status: string;
-}
-
 export function Home(){
 
-  const { data: repositories, loading } = useFetch<dataDTO[]>('/users/diego3g/repos')
+  const { data, loading } = useFetch('/ws/01001000/json/')
 
     return(
         <View>
             <Text>Oi</Text>
             {loading ? <Text>Carregando...</Text> :
             <View>
-            <Button title="Create New" onPress={() => usePost<CreatPostParams>('/public/v2/users', {
+            <Button title="Create New" onPress={() => usePost('/public/v2/users', {
                 email: "diogenes@develcode.com",
-                gender: "masculino",
+                gender: "male",
                 name: "diogenes",
-                status: "ativo",
+                status: "active",
               },
               {
                 headers: {
-                  Authorization: "Bearer 554ee3d08748731d8fa1949dfc561dc57ee741eeb82ec6ea429e30c675bab3a9"
+                  Authorization: 'Bearer daf3a258b8841c825fae207d9a61a5f5d69bcdaac7086cb868b59da6efc9f25f'
                 }
               }
                 )}/>
-            {repositories?.map(repo => {
-              return(
-                <View key={repo.full_name}>
-                  <Text>{repo.description}</Text>
-                  <Text>{repo.full_name}</Text>
-                </View>
-              )
-            })
-          }
+              <Button title="Delete"/>
+
+              <View>
+                <Text>
+                    {data.bairro}{'\n'}
+                    {data.logradouro}{'\n'}
+                    {data.localidade}{'\n'}
+                </Text>
+              </View>
           </View>
         }
         </View>
