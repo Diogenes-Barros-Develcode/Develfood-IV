@@ -16,8 +16,6 @@ export function Routes(){
             <Tabs.Screen name="Favorites" component={Favorites}/>
             <Tabs.Screen name="Historic" component={Historic}/>
             <Tabs.Screen name="Settings" component={Settings}/>
-
-
         </Tabs.Navigator>
     )
 
